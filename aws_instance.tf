@@ -1,3 +1,5 @@
+# configuration to launch a simple aws instance and run a busybox server in it
+
 # first step is to configure the provider. Take AWs for this example
 provider "aws" {
   region = "us-east-2"
@@ -37,4 +39,10 @@ resource "aws_security_group" "sgi-1" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+}
+
+# instead of going to aws console for ip, print in terminal using output
+output "public_ip" {
+  value       = aws_instance.instance_1.public_ip
+  description = "The public IP address of the web server"
 }
